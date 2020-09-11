@@ -14,6 +14,7 @@ public class Item : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        gameManager.ItemDestroyed();
         Destroy(gameObject);
     }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,14 +25,27 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if(itemsRemaining <= 0)
+        {
+            LoadNextLevel();
+        }
+    }
+
+    public void LoadNextLevel()
+    {
+        int currenSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currenSceneIndex + 1);
     }
 
     public void CountItems()
     {
         itemsRemaining++;
+    }
+
+    public void ItemDestroyed()
+    {
+        itemsRemaining--;
     }
 }
